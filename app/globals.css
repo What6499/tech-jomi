@@ -7,46 +7,34 @@
   --font-anton: "Anton", serif;
   --font-poppins: "Poppins", serif;
 }
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark;
-}
-
-/* Light Theme */
-/* Light Theme */
-@plugin "daisyui/theme" {
-  name: light;
-  default: true;
-
-  --color-primary: #1a1a1a; /* primary text / buttons */
-  --color-secondary: #444444; /* secondary text */
-  --color-accent: #888888; /* subtle accents */
-  --color-neutral: #121212; /* main text */
-  --color-base-100: #ffffff; /* main background */
-  --color-base-200: #f9f9f9; /* cards / surfaces */
-  --color-base-300: #e5e5e5; /* borders / dividers */
-  --color-info: #2b6cb0; /* info messages */
-  --color-success: #38a169; /* success messages */
-  --color-warning: #d69e2e; /* warning messages */
-  --color-error: #e53e3e; /* error messages */
+@theme light {
+  --color-primary-light: #1a1a1a; /* primary text / buttons */
+  --color-secondary-light: #444444; /* secondary text */
+  --color-accent-light: #888888; /* subtle accents */
+  --color-neutral-light: #121212; /* main text */
+  --color-base-100-light: #ffffff; /* main background */
+  --color-base-200-light: #f9f9f9; /* cards / surfaces */
+  --color-base-300-light: #e5e5e5; /* borders / dividers */
+  --color-info-light: #2b6cb0; /* info messages */
+  --color-success-light: #38a169; /* success messages */
+  --color-warning-light: #d69e2e; /* warning messages */
+  --color-error-light: #e53e3e; /* error messages */
 }
 
 /* Dark Theme (matte black) */
-@plugin "daisyui/theme" {
-  name: dark;
-
-  --color-primary: #ffffff; /* main text / buttons */
-  --color-secondary: #d1d1d1; /* secondary text */
-  --color-accent: #7a7a7a; /* subtle accents */
-  --color-neutral: #f0f0f0; /* main text */
-  --color-base-100: #121212; /* matte black background */
-  --color-base-200: #1a1a1a; /* cards / surfaces */
-  --color-base-300: #2a2a2a; /* borders / dividers */
-  --color-info: #63b3ed; /* info messages */
-  --color-success: #48bb78; /* success messages */
-  --color-warning: #f6e05e; /* warning messages */
-  --color-error: #f56565; /* error messages */
+@theme dark {
+  --color-primary-dark: #ffffff; /* main text / buttons */
+  --color-secondary-dark: #d1d1d1; /* secondary text */
+  --color-accent-dark: #7a7a7a; /* subtle accents */
+  --color-neutral-dark: #f0f0f0; /* main text */
+  --color-base-100-dark: #121212; /* matte black background */
+  --color-base-200-dark: #1a1a1a; /* cards / surfaces */
+  --color-base-300-dark: #2a2a2a; /* borders / dividers */
+  --color-info-dark: #63b3ed; /* info messages */
+  --color-success-dark: #48bb78; /* success messages */
+  --color-warning-dark: #f6e05e; /* warning messages */
+  --color-error-dark: #f56565; /* error messages */
 }
-
 /*
   * This is a simple base layer to get started.
   * We use our semantic colors to apply the correct theme.
