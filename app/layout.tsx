@@ -9,14 +9,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={` min-h-screen bg-base-100-light dark:bg-base-100-dark     antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function() {
+  try {
+    var storedTheme = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = storedTheme ? storedTheme : (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (_) {}
+})();
+      `,
+          }}
+        />
+      </head>
+      <body className="min-h-screen antialiased bg-base-200-light dark:bg-base-100-dark">
         {children}
       </body>
     </html>

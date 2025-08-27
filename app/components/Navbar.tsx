@@ -10,8 +10,8 @@ const Navbar = async () => {
   const session = await auth();
   console.log(session);
   return (
-    <header className="  bg-base-200-light dark:bg-base-200-dark shadow-sm">
-      <nav className="py-4 text-neutral-light dark:text-neutral-dark flex justify-between mx-auto items-center container text-neutral">
+    <header className="  bg-base-100-light dark:bg-base-200-dark shadow-sm">
+      <nav className="py-4 text-neutral-light dark:text-neutral-dark flex justify-between mx-auto items-center container ">
         <div>
           <h1 className="text-3xl font-poppins font-extrabold ">TECH-JOMI</h1>
         </div>

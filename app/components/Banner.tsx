@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import BannerSkeleton from "./BannerSkeleton";
 
 export default function Banner() {
+  const [imgLoaded, setImgLoaded] = useState(false);
   return (
     <section className="py-16 ">
       <div className="container mx-auto flex flex-col-reverse md:flex-row items-center gap-8 ">
@@ -32,11 +36,17 @@ export default function Banner() {
 
         {/* Right: Image */}
         <div className="flex-1 relative w-full h-96 md:h-[600px] shadow-lg overflow-hidden rounded-2xl">
+          {!imgLoaded && <BannerSkeleton></BannerSkeleton>}
+
+          {/* Actual Image */}
           <Image
             src="/banner.jpg"
             alt="Tech Accessories"
             fill
-            className="object-cover filter saturate-0"
+            className={`object-cover transition-opacity filter saturate-0 ${
+              imgLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            onLoadingComplete={() => setImgLoaded(true)}
           />
         </div>
       </div>
