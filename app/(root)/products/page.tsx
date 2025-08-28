@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
+
 import Link from "next/link";
 
 // Declare the type directly on the page
@@ -72,7 +72,7 @@ export default function ProductsPage() {
           </div>
         ))}
       </div>
-      
+
     </div>
   );
 }

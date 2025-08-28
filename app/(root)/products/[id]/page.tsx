@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
-import { trackAllowedDynamicAccess } from "next/dist/server/app-render/dynamic-rendering";
-import { auth } from "@/auth";
 
 type Product = {
   _id: string;
@@ -22,10 +20,7 @@ export default function ProductDetailPage() {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const session = await auth();
-    if 
-  }, []);
+
   useEffect(() => {
     async function fetchProduct() {
       try {
