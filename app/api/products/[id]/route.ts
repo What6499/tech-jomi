@@ -1,15 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDB } from "@/lib/mongo";
-import { ObjectId } from "mongodb";
+import { ObjectId, WithId, Document } from "mongodb";
+
+interface Context {
+  params: Promise<{ id: string }>;
+}
 
 export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+  request: NextRequest,
+  context: Context
+): Promise<NextResponse<WithId<Document> | { error: string }>> {
   try {
-    const { db } = await connectToDB();
-    const { id } = params;
+    const { id } = await context.params;
 
+    if (!ObjectId.isValid(id)) {
+      return NextResponse.json(
+        { error: "Invalid product ID" },
+        { status: 400 }
+      );
+    }
+
+    const { db } = await connectToDB();
     const product = await db
       .collection("productsCollection")
       .findOne({ _id: new ObjectId(id) });
@@ -20,7 +31,7 @@ export async function GET(
 
     return NextResponse.json(product, { status: 200 });
   } catch (error) {
-    console.error("GET /api/products/[id] error:", error);
+    console.error("Error fetching product:", error);
     return NextResponse.json(
       { error: "Failed to fetch product" },
       { status: 500 }
