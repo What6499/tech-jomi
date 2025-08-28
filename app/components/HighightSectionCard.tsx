@@ -9,6 +9,7 @@ type Product = {
   name: string;
   brand: string;
   price: number;
+  description:string
 };
 
 export default function HighlightSection() {
