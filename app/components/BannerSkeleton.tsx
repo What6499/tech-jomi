@@ -1,4 +1,4 @@
-// BannerImageSkeleton.tsx
+
 import React from "react";
 
 interface BannerImageSkeletonProps {

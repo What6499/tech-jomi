@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   try {
     const { db } = await connectToDB();
 
-    // Access the 'limit' query parameter from the request URL
+ 
     const limitParam = req.nextUrl.searchParams.get("limit");
     const limit = limitParam ? parseInt(limitParam) : 0;
 
@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
     console.log(products);
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
-    console.error("GET /api/products error:", error); // <-- add this
+    console.error("GET /api/products error:", error); 
     return NextResponse.json(
       { error: "Failed to fetch products" },
       { status: 500 }

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function Footer() {
   return (
     <footer className="footer sm:footer-horizontal bg-base-100-light dark:bg-base-200-dark text-neutral-light mt-16  dark:text-neutral-dark p-10">
