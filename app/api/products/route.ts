@@ -4,10 +4,19 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const { db } = await connectToDB();
-    const products = await db
-      .collection("productsCollection")
-      .find({})
-      .toArray();
+
+    // Access the 'limit' query parameter from the request URL
+    const limitParam = req.nextUrl.searchParams.get("limit");
+    const limit = limitParam ? parseInt(limitParam) : 0;
+
+    let query = db.collection("productsCollection").find({});
+
+    if (limit > 0) {
+      query = query.limit(limit);
+    }
+
+    const products = await query.toArray();
+
     console.log(products);
     return NextResponse.json(products, { status: 200 });
   } catch (error) {

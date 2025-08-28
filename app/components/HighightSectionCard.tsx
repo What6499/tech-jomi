@@ -1,50 +1,70 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
-// Declare the type directly on the page
 type Product = {
-  _id?: string;
+  _id: string;
   name: string;
   brand: string;
-  description: string;
   price: number;
-  category: string;
-  features: string[];
-  image: string;
 };
 
-export default function ProductsPage() {
+export default function HighlightSection() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const { data } = await axios.get<Product[]>("/api/products");
-        setProducts(data);
-      } catch (error) {
-        console.error("Failed to fetch products", error);
+        // Fetch only 3 products using the limit query parameter
+        const response = await axios.get<Product[]>("/api/products?limit=4");
+        setProducts(response.data);
+      } catch (err) {
+        console.error("Failed to fetch products", err);
+        setError("Failed to load products. Please try again later.");
       } finally {
         setLoading(false);
       }
     }
+
     fetchProducts();
   }, []);
 
-  if (loading)
-    return <div className="text-center py-16">Loading products...</div>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-16">
+        <span className="loading loading-spinner text-primary"></span>
+        <p className="ml-2">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-error py-16">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="text-center text-gray-500 py-16">
+        No products to display.
+      </div>
+    );
+  }
 
   return (
-    <div className="container mx-auto py-12 px-4 ">
-      <h1 className="text-3xl md:text-4xl font-anton font-bold mb-8 text-center">
-        All Products
+    <>
+      <h1 className="font-anton text-6xl font-bold text-center mb-16">
+        Highlights
       </h1>
 
-      <div className="grid grid-cols-1 text-neutral-light dark:text-neutral-dark sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 container gap-6 mx-auto">
         {products.map((product) => (
           <div
             key={product._id}
@@ -72,7 +92,6 @@ export default function ProductsPage() {
           </div>
         ))}
       </div>
-      
-    </div>
+    </>
   );
 }
